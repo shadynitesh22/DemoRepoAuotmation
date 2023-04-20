@@ -80,7 +80,7 @@
                     <!-- MainClass in mainfest make an executable jar -->
                     <archive>
                         <manifest>
-                            <mainClass>com.exmaple.TestRunner</mainClass>
+                            <mainClass>org.testng.TestNG</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

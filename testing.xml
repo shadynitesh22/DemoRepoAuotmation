@@ -3,19 +3,19 @@
   <test name="Child Protection PlanTest">
     <parameter name="webdriver.remote.sessionid" value="ChildProtectionPlanTestSession"/>
     <classes>
-      <class name="java.UfUnity_Testcase.Fhd.ChildProtectionPlanTest"/>
+       <class name="UfUnity_TestCase.Fhd.UfUnityFhdFhProfileTest"></class>
     </classes>
   </test>
   <test name="LoginPageTest">
     <parameter name="webdriver.remote.sessionid" value="LoginPageTestSession"/>
     <classes>
-      <class name="java.UfUnity_Testcase.Fhd.LoginPageTest"/>
+      <class name="UfUnity_Testcase.Fhd.LoginPageTest"/>
     </classes>
   </test>
   <test name="MyProfileTest">
     <parameter name="webdriver.remote.sessionid" value="MyProfileTestSession"/>
     <classes>
-      <class name="java.UfUnity_Testcase.Fhd.MyProfileTest"/>
+      <class name="UfUnity_Testcase.Fhd.MyProfileTest"/>
     </classes>
   </test>
 </suite>
