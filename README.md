@@ -37,7 +37,9 @@ Run it locally aayush dai please use this command after making the testing file
 mvn package -DskipTest=true
 ```
 3. To test the xml file is running (will run docker images.👆 ):
+
+
+```
 java -cp target/dockertest-jar-with-dependencies.jar org.testng.TestNG ./testing.xml 
 ```
-sudo docker-compose up 
 <sub>note : sudo is used only for permission🔒 adjust to your requirements.</sub>
