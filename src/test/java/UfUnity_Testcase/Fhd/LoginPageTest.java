@@ -23,19 +23,19 @@ public class LoginPageTest extends TestBase {
         waitHelper.waitForElement(driver,new AccountVerification(driver).TextLoginPage,10);
         accountVerification=new AccountVerification(driver);
     }
-    @Test(priority = 1)
+    @Test(priority = 1,testName = "Check Browser Version")
     public void Check_Version_Application_Test(){
         accountVerification.Check_Version_Application();
     }
 
 
-    @Test(priority = 4)
+    @Test(priority = 4,testName = "Login to Application Test")
     public void Login_to_Application_Test() throws IOException, ParseException {
         String Unity_Username=new ReadJsonData().ReadJSONData("unityFhdUsername");
         String Unity_Password=new  ReadJsonData().ReadJSONData("unityFhdPassword");
         accountVerification.Login_to_Application(Unity_Username,Unity_Password);
     }
-    @Test(priority = 5)
+    @Test(priority = 5,testName = "Logout to Application Test")
     public void Logout_from_Application_Test(){
         accountVerification.Logout_from_Application();
         waitHelper.waitForElement(driver,accountVerification.TextLoginPage,10);

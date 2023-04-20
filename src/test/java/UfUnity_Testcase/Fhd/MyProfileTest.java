@@ -27,18 +27,18 @@ public class MyProfileTest extends TestBase {
         myProfile=new MyProfile(driver);
     }
 
-    @Test(priority = 1)
+    @Test(priority = 1,testName = "Go to profile")
     public void Go_To_My_Profile_Test(){
         new AccountVerification(driver).LogoutArrow.click();
         waitHelper.waitForElement(driver,new AccountVerification(driver).Sign_out_text,10);
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2,testName = "Profile test 2")
     public void Go_To_MyProfile_Test(){
         myProfile.Go_To_MyProfile();
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3,testName = "Profile test 3")
     public void Go_To_MyProfile_Info_Test() throws IOException, ParseException {
         String First_Name=new ReadJsonData().ReadJSONData("First_name");
         String Last_Name=new ReadJsonData().ReadJSONData("Last_name");

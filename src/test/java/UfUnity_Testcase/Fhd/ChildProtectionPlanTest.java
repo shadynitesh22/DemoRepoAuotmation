@@ -29,7 +29,7 @@ public class ChildProtectionPlanTest extends TestBase {
         readJsonData=new ReadJsonData();
 
     }
-    @Test
+    @Test(testName = "Go to Child_protection tab")
     public void Go_to_Child_Protection_Tab_Test() throws IOException, ParseException, InterruptedException {
         childProtectionPlan.Go_to_Child_Protection_Tab();
         childProtectionPlan.Begin_Participant(readJsonData.Read_JSON_Data("CHILD_PROTECTION_PLAN"));
