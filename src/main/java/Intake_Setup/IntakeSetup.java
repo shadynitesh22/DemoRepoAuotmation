@@ -116,13 +116,10 @@ public class IntakeSetup extends TestBase {
                 } else if (jo.get("action") != null) {
                     if(jo.get("action").equals("CALANDER_ACTION")){
                         Calendar Calendar = new Calendar(driver);
-//                          String year = jo.get("Year").toString();
-//                          String month = jo.get("Month").toString();
-//                          String day = jo.get("Day").toString();
-//                        Calendar.PickDateFromCalender(year,month,day);
-
-                        calendar.PickDateFromCalender(readJsonData.ReadJSONData("Year"),readJsonData.ReadJSONData("Month"),readJsonData.ReadJSONData("Day"));
-
+                        String year = jo.get("Year").toString();
+                        String month = jo.get("Month").toString();
+                        String day = jo.get("Day").toString();
+                        Calendar.PickDateFromCalender(year,month,day);
 
                     } else if (jo.get("action").equals("DROPDOWN_ACTION")) {
                         objDropDownHelper = new DropDown(driver);

@@ -32,6 +32,16 @@ public class ChildProtectionPlan extends TestBase {
 
     @FindBy(xpath = "//span[contains(text(),'Next')]")
     public WebElement NextButton;
+
+    @FindBy(xpath = "//span[contains(text(),' Print Confirmation ')]")
+    WebElement PrintConfirmation;
+
+    @FindBy(xpath = "//mat-toolbar-row[@class='mat-toolbar-row flex flex-row']/div[2]/button/span[1]")
+    WebElement Cross_Icon;
+
+    @FindBy(xpath = "//input[@id='searchInput']")
+    WebElement Policy_search;
+
     public void Go_to_Child_Protection_Tab() {
         Child_Protection_Plan_tab.click();
         new WaitHelper(driver).waitForElement(driver,Child_Protection_Plan_Claim_Intake,10);
@@ -39,7 +49,13 @@ public class ChildProtectionPlan extends TestBase {
 
     public void Begin_Participant(String path) throws IOException, ParseException, InterruptedException {
         intakeInitialization.Participant_Flow(path);
+    }
 
+    public void Request_Confirmation(){
+        new WaitHelper(driver).waitForElement(driver,PrintConfirmation,10);
+        PrintConfirmation.click();
+        Cross_Icon.click();
+        new WaitHelper(driver).waitForElement(driver,Policy_search,10);
     }
 
 }

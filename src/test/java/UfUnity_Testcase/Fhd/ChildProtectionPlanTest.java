@@ -7,6 +7,7 @@ import Utility.AccountVerification;
 import Utility.ReadJsonData;
 import helper.Verification.WaitHelper;
 import org.json.simple.parser.ParseException;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -29,10 +30,24 @@ public class ChildProtectionPlanTest extends TestBase {
         readJsonData=new ReadJsonData();
 
     }
-    @Test
+    @Test(priority = 1)
     public void Go_to_Child_Protection_Tab_Test() throws IOException, ParseException, InterruptedException {
         childProtectionPlan.Go_to_Child_Protection_Tab();
         childProtectionPlan.Begin_Participant(readJsonData.Read_JSON_Data("CHILD_PROTECTION_PLAN"));
+    }
+
+//    @Test(priority = 2)
+//    public void Print_Confirmation(){
+//        childProtectionPlan.Request_Confirmation();
+//    }
+//    @Test(priority = 3)
+//    public void LogoutFromApplication(){
+//        new AccountVerification(driver).Logout_from_Application();
+//    }
+
+    @AfterClass
+    public void AfterClass(){
+        driver.quit();
     }
 
 }
