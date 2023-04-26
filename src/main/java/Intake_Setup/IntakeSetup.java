@@ -71,7 +71,7 @@ public class IntakeSetup extends TestBase {
 
     public void Begin_Participant(){
         Child_Protection_Plan_Intake.click();
-        new WaitHelper(driver,10).waitForElement(new ChildProtectionPlan(driver).NextButton);
+        //new WaitHelper(driver,10).waitForElement(new ChildProtectionPlan(driver).NextButton);
     }
 
     public void Participant_Flow(String path) throws IOException, ParseException, InterruptedException {

@@ -1,5 +1,6 @@
 package helper.Verification;
 
+import BaseClass.TestBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -8,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class WaitHelper {
+public class WaitHelper extends TestBase {
     private WebDriver driver;
     WebDriverWait wait;
     public WaitHelper(WebDriver driver,int timeout) {
