@@ -7,5 +7,8 @@ while curl http://host.docker.internal:4444/wd/hub/status| grep -q "Selenium Gri
   sleep 1
 done
 
+# Compile the artifacts
 
-java -cp target/dockertest-jar-with-dependencies.jar org.testng.TestNG ./testing.xml 
+# Xvfb :99 -screen 0 1920x1080x24 &
+
+mvn test -Dsurefire.suiteXmlFiles=testing.xml

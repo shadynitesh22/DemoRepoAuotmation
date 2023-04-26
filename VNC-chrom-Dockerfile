@@ -1,0 +1,43 @@
+# Stage 1: Install python3-websockify on Ubuntu 22.04
+FROM ubuntu:22.04 as builder
+
+# Define WorkDir so you can load this in another Image.
+WORKDIR /usr/src/python3-websockify
+
+# Install python3 and git
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip  && \
+    pip3 install websockify 
+   
+
+# Stage 2: Build final image
+FROM consol/ubuntu-xfce-vnc
+
+# Switch to another user
+USER root
+
+# Copy the Websockify binary from the builder image
+COPY --from=builder /usr/local/bin/websockify /usr/src/python3-websockify/websockify
+
+# Set up Websockify proxy
+ENV VNC_PORT=5901
+ENV WEBSOCKIFY_PORT=6080
+EXPOSE $WEBSOCKIFY_PORT
+
+# Create directory for the startup script
+RUN mkdir -p /opt/selenium/node
+
+# Clone the noVNC and Websockify repositories
+RUN git clone https://github.com/novnc/noVNC.git /opt/novnc && \
+    git clone https://github.com/novnc/websockify.git /opt/websockify
+
+# Add the Websockify proxy to the startup script for the Chrome nodes
+RUN sed -i 's|#!/bin/bash|#!/bin/bash\n\nexport PYTHONPATH=/usr/local/lib/python3.10/site-packages\nwebsockify --web /opt/novnc/ --token-plugin TokenFile --token-source /opt/selenium/node/token.txt $WEBSOCKIFY_PORT localhost:$VNC_PORT \&|' /opt/selenium/node/start-chrome.sh
+
+# Set the startup script as the entrypoint
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+ENV PYTHONPATH=/usr/local/lib/python3.10/site-packages
+
+ENTRYPOINT ["/bin/bash", "-c", "/start.sh"]

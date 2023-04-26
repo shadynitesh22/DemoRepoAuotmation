@@ -1,18 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Unity Testing" parallel="tests" thread-count="5">
   <test name="Child Protection PlanTest">
+    <parameter name="browser" value="chrome"/>
     <parameter name="webdriver.remote.sessionid" value="ChildProtectionPlanTestSession"/>
     <classes>
-       <class name="UfUnity_TestCase.Fhd.UfUnityFhdFhProfileTest"></class>
+    <class name="UUfUnity_Testcase.Fhd.ChildProtectionPlanTest"/>
     </classes>
   </test>
   <test name="LoginPageTest">
+    <parameter name="browser" value="firefox"/>
     <parameter name="webdriver.remote.sessionid" value="LoginPageTestSession"/>
     <classes>
       <class name="UfUnity_Testcase.Fhd.LoginPageTest"/>
     </classes>
   </test>
   <test name="MyProfileTest">
+    <parameter name="browser" value="chrome"/>
     <parameter name="webdriver.remote.sessionid" value="MyProfileTestSession"/>
     <classes>
       <class name="UfUnity_Testcase.Fhd.MyProfileTest"/>
