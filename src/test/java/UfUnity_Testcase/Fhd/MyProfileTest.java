@@ -21,8 +21,8 @@ public class MyProfileTest extends TestBase {
     public void Setup() throws IOException, ParseException {
         LaunchBrowser(new ReadJsonData().ReadJSONData("browser_name"));
         driver.get(new ReadJsonData().ReadJSONData("website"));
-        waitHelper=new WaitHelper(driver);
-        waitHelper.waitForElement(driver,new AccountVerification(driver).TextLoginPage,10);
+        waitHelper=new WaitHelper(driver,10);
+        waitHelper.waitForElement(new AccountVerification(driver).TextLoginPage);
         new AccountVerification(driver).Login_to_Application(new ReadJsonData().ReadJSONData("unityFhdUsername"),new ReadJsonData().ReadJSONData("unityFhdPassword"));
         myProfile=new MyProfile(driver);
     }
@@ -30,7 +30,7 @@ public class MyProfileTest extends TestBase {
     @Test(priority = 1,testName = "Go to profile")
     public void Go_To_My_Profile_Test(){
         new AccountVerification(driver).LogoutArrow.click();
-        waitHelper.waitForElement(driver,new AccountVerification(driver).Sign_out_text,10);
+        waitHelper.waitForElement(new AccountVerification(driver).Sign_out_text);
     }
 
     @Test(priority = 2,testName = "Profile test 2")
@@ -49,7 +49,7 @@ public class MyProfileTest extends TestBase {
     public void LogoutFromApplication()
     {
         new AccountVerification(driver).Logout_from_Application();
-        waitHelper.waitForElement(driver,new AccountVerification(driver).TextLoginPage,10);
+        waitHelper.waitForElement(new AccountVerification(driver).TextLoginPage);
     }
     @AfterClass
     public void AfterClass(){
