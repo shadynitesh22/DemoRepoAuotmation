@@ -2,7 +2,6 @@ package UfUnity_Pages.FHD;
 
 import BaseClass.TestBase;
 import Intake_Setup.IntakeSetup;
-import Utility.ReadJsonData;
 import helper.Verification.WaitHelper;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.WebDriver;
@@ -44,7 +43,7 @@ public class ChildProtectionPlan extends TestBase {
 
     public void Go_to_Child_Protection_Tab() {
         Child_Protection_Plan_tab.click();
-        new WaitHelper(driver).waitForElement(driver,Child_Protection_Plan_Claim_Intake,10);
+        new WaitHelper(driver,10).waitForElement(Child_Protection_Plan_Claim_Intake);
     }
 
     public void Begin_Participant(String path) throws IOException, ParseException, InterruptedException {
@@ -52,10 +51,10 @@ public class ChildProtectionPlan extends TestBase {
     }
 
     public void Request_Confirmation(){
-        new WaitHelper(driver).waitForElement(driver,PrintConfirmation,10);
+        new WaitHelper(driver,10).waitForElement(PrintConfirmation);
         PrintConfirmation.click();
         Cross_Icon.click();
-        new WaitHelper(driver).waitForElement(driver,Policy_search,10);
+        new WaitHelper(driver,10).waitForElement(Policy_search);
     }
 
 }

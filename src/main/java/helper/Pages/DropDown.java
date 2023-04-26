@@ -9,9 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import java.time.Duration;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class DropDown extends TestBase {
     WaitHelper objWaitHelper;
@@ -30,7 +28,7 @@ public class DropDown extends TestBase {
     {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        objWaitHelper = new WaitHelper(driver);
+        objWaitHelper = new WaitHelper(driver,10);
     }
     public void SelectUsingVisibleValue(WebElement element1, String visibleValue)
     {
@@ -67,7 +65,7 @@ public class DropDown extends TestBase {
     public void Get_Drop_Down_Value(String value) throws InterruptedException {
         driver.findElement(By.xpath("//div[starts-with(@class,'mat-select-arrow-wrapper')]")).click();
         List <WebElement >dropdown_list=driver.findElements(By.xpath("//div[starts-with(@class,'cdk-overlay-pane')]/div/div/mat-option"));
-        new WaitHelper(driver).waitForElement(driver, (WebElement) dropdown_list,10);
+        new WaitHelper(driver,10).waitForElement((WebElement) dropdown_list);
 
         System.out.println("The Size="+dropdown_list.size());
         for (int i=0;i<=dropdown_list.size();i++){

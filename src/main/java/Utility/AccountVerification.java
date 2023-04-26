@@ -12,7 +12,7 @@ public class AccountVerification extends TestBase {
 
     public AccountVerification(WebDriver driver) {
         this.driver=driver;
-        waitHelper=new WaitHelper(driver);
+        waitHelper=new WaitHelper(driver,10);
         PageFactory.initElements(driver,this);
     }
 
@@ -75,12 +75,12 @@ public class AccountVerification extends TestBase {
         UsernameXpath.sendKeys(uname);
         PasswordXpath.sendKeys(password);
         LoginButton.click();
-        waitHelper.waitForElement(driver,PaymentOverview,10);
+        waitHelper.waitForElement(PaymentOverview);
     }
 
     public void Logout_from_Application(){
         LogoutArrow.click();
-        waitHelper.waitForElement(driver,Sign_out_text,10);
+        waitHelper.waitForElement(Sign_out_text);
         Sign_out_text.click();
     }
 

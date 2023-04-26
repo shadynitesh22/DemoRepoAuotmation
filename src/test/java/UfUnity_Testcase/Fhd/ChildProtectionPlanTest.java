@@ -7,7 +7,6 @@ import Utility.AccountVerification;
 import Utility.ReadJsonData;
 import helper.Verification.WaitHelper;
 import org.json.simple.parser.ParseException;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -24,7 +23,7 @@ public class ChildProtectionPlanTest extends TestBase {
     public void Setup() throws IOException, ParseException {
         LaunchBrowser(new ReadJsonData().ReadJSONData("browser_name"));
         driver.get(new ReadJsonData().ReadJSONData("website"));
-        new WaitHelper(driver).waitForElement(driver,new AccountVerification(driver).TextLoginPage,10);
+        new WaitHelper(driver,10).waitForElement(new AccountVerification(driver).TextLoginPage);
         new AccountVerification(driver).Login_to_Application(new ReadJsonData().ReadJSONData("unityFhdUsername"),new ReadJsonData().ReadJSONData("unityFhdPassword"));
         childProtectionPlan=new ChildProtectionPlan(driver);
         readJsonData=new ReadJsonData();
@@ -45,7 +44,7 @@ public class ChildProtectionPlanTest extends TestBase {
 //        new AccountVerification(driver).Logout_from_Application();
 //    }
 
-    @AfterClass
+   // @AfterClass
     public void AfterClass(){
         driver.quit();
     }
