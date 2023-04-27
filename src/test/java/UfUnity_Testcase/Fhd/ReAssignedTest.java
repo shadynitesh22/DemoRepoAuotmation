@@ -7,11 +7,13 @@ import Utility.ReadJsonData;
 import helper.Pages.*;
 import helper.Verification.WaitHelper;
 import org.json.simple.parser.ParseException;
+import org.openqa.selenium.By;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.NoSuchElementException;
 
 
 public class ReAssignedTest extends TestBase {
@@ -258,41 +260,57 @@ public class ReAssignedTest extends TestBase {
 
     @Test(priority = 25)
     public void Go_to_Signature() throws InterruptedException {
-        reAssigned.Goto_Signature();
-        reAssigned.Wait_For_Next_Button();
-        new Upload(driver).addUploadDocument();
 
         boolean isDispalyed = false;
-        try {
+
+        try
+        {
             reAssigned.SaveButton.isDisplayed();
             System.out.println(reAssigned.SaveButton.getText()+"is Displayed");
             reAssigned.SaveButton.click();
         }
-        catch (Exception e){
-            System.out.println("Element is not Displayed:"+e);
-            isDispalyed=true;
+        catch (NoSuchElementException e)
+        {
+            reAssigned.NextButton.isDisplayed();
             reAssigned.NextButton.click();
+            System.out.println("Element is not Displayed:"+e);
         }
-        Thread.sleep(3000);
+
+        catch (Exception e)
+        {
+            new Signature(driver).sign.isDisplayed();
+            new Signature(driver).Get_Signature_Helper();
+            System.out.println("Element is not Displayed:"+e);
+        }
+        finally
+        {
+            System.out.println("The Exception is not Displayed");
+        }
+        reAssigned.Wait_For_Next_Button();
+
     }
 
     @Test(priority = 26)
-    public void Upload_Funeral_Home_Bill(){
-        boolean isDisplayed=true;
-        try {
-            reAssigned.SaveButton.isDisplayed();
-            reAssigned.SaveButton.click();
-            new AccountVerification(driver).Logout_from_Application();
-        }
-        catch (Exception e){
-            System.out.println("Element is not found:-"+e);
-            reAssigned.NextButton.click();
-            reAssigned.Complete_request();
-            new AccountVerification(driver).Logout_from_Application();
+    public void Upload_Funeral_Home_Bill() throws InterruptedException {
+        if (reAssigned.Text_Upload_Document.isDisplayed())
+        {
+            try {
+                new Upload(driver).addUploadDocument();
+                reAssigned.NextButton.click();
+            }
+            catch (NoSuchElementException | InterruptedException e){
+                new Upload(driver).addUploadDocument();
+                reAssigned.SaveButton.click();
+            }
+            catch (Exception e){
+                new Signature(driver).Get_Signature_Helper();
+            }
         }
 
+
+
     }
-    @AfterClass
+    //@AfterClass
     public void AfterClass(){
         driver.quit();
     }

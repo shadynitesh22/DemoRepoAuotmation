@@ -36,7 +36,7 @@ public class LoginPageTest extends TestBase {
         accountVerification.Login_to_Application(Unity_Username,Unity_Password);
     }
     @Test(priority = 5)
-    public void Logout_from_Application_Test(){
+    public void Logout_from_Application_Test() throws InterruptedException {
         accountVerification.Logout_from_Application();
         waitHelper.waitForElement(accountVerification.TextLoginPage);
     }

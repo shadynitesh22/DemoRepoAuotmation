@@ -46,8 +46,7 @@ public class MyProfileTest extends TestBase {
         myProfile.Go_To_MyProfile_Info(First_Name,Last_Name,Title);
     }
 
-    public void LogoutFromApplication()
-    {
+    public void LogoutFromApplication() throws InterruptedException {
         new AccountVerification(driver).Logout_from_Application();
         waitHelper.waitForElement(new AccountVerification(driver).TextLoginPage);
     }

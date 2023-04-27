@@ -62,10 +62,13 @@ public class AccountVerification extends TestBase {
         Logout From Application
      */
 
-    @FindBy(xpath = "//mat-icon[contains(text(),'keyboard_arrow_down')]")
+    @FindBy(xpath = "//div[starts-with(@class,'content-wrapper')]/fuse-toolbar/mat-toolbar/div/div[2]/button[2]/span[1]")
     public WebElement LogoutArrow;
-    @FindBy(xpath = "//span[contains(text(),'Sign Out')]")
+    @FindBy(xpath = "//div[starts-with(@class,'mat-menu-content ng-tns')]/button/span[contains(text(),'Sign Out')]")
     public WebElement Sign_out_text;
+
+    @FindBy(xpath = "//h1[contains(text(),'LOGIN TO YOUR ACCOUNT')]")
+    WebElement LoginPageText;
 
     public void Check_Version_Application(){
         System.out.println("Version of the Application:-"+Version.getText());
@@ -78,7 +81,9 @@ public class AccountVerification extends TestBase {
         waitHelper.waitForElement(PaymentOverview);
     }
 
-    public void Logout_from_Application(){
+    public void Logout_from_Application() throws InterruptedException {
+        waitHelper.waitForElement(LogoutArrow);
+        //Thread.sleep(2000);
         LogoutArrow.click();
         waitHelper.waitForElement(Sign_out_text);
         Sign_out_text.click();

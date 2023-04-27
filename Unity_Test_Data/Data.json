@@ -3,7 +3,12 @@
     "browser_name": "Chrome",
     "website": "https://ufuat.benekiva.io/login",
     "unityFhdUsername": "bishal+fhd@benekiva.com",
+    "unityCsdUsername": "bishal+csr@benekiva.com",
     "unityFhdPassword": "Amandofidel@7819",
+    "unityPolicySearch": "0770052313",
+    "Year": "2000",
+    "Month": "DEC",
+    "Day":"2",
     "First_name": "Bishal",
     "Last_name": "Shah",
     "Title_User": "Mr",
@@ -18,5 +23,6 @@
     "City": "New York",
     "State": "AL",
     "Medicaid": "Yes"
+
   }
 ]
