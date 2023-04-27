@@ -183,7 +183,7 @@ public class ChildProtectionPlanTest extends TestBase {
         new ReAssigned(driver).Complete_request();
     }
    @Test(priority = 20)
-    public void Log_out_FromApplication(){
+    public void Log_out_FromApplication() throws InterruptedException {
         new AccountVerification(driver).Logout_from_Application();
     }
     @AfterClass

@@ -35,8 +35,8 @@ public class LoginPageTest extends TestBase {
         String Unity_Password=new  ReadJsonData().ReadJSONData("unityFhdPassword");
         accountVerification.Login_to_Application(Unity_Username,Unity_Password);
     }
-    @Test(priority = 5,testName = "Logout to Application Test")
-    public void Logout_from_Application_Test(){
+    @Test(priority = 5)
+    public void Logout_from_Application_Test() throws InterruptedException {
         accountVerification.Logout_from_Application();
         waitHelper.waitForElement(accountVerification.TextLoginPage);
     }

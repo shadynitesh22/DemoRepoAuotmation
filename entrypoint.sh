@@ -11,4 +11,4 @@ done
 
 # Xvfb :99 -screen 0 1920x1080x24 &
 
-mvn test -Dsurefire.suiteXmlFiles=testing.xml
+mvn test -Dsurefire.suiteXmlFiles=testng.xml

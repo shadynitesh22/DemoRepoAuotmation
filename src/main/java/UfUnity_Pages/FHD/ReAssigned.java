@@ -97,6 +97,9 @@ public class ReAssigned extends TestBase {
     @FindBy(xpath = "//input[@id='searchInput']")
     WebElement PolicySearch;
 
+    @FindBy(xpath = "//*[@id='chat-content']/div/div[84]/div[1]")
+    public WebElement uploadText;
+
     public void Wait_For_Next_Button(){
         waitHelper.waitForElement(NextButton);
     }
