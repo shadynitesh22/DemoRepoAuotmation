@@ -2,8 +2,8 @@ name: Deploy to Remote Server
 
 on:
   push:
-    branches: 
-    - '*'
+    branches:
+      - "*"
 
 jobs:
   deploy:
@@ -42,7 +42,7 @@ jobs:
           port: 2020
 
           script: |
-            ssh -o StrictHostKeyChecking=no -i ${{env.LOCATION}} ${{ env.ASERVER_HOST }} << EOF
+            ssh -i ${{env.LOCATION}} ${{ env.ASERVER_HOST }} 
               mkdir automationBenekiva
               cd automationBenekiva
 

@@ -18,8 +18,7 @@ services:
       - ./src:/app/src
       - ./testing.xml:/app/testing.xml
       - ./test_results:/app/test_results
-    networks:
-      - automation
+   
 
   selenium-hub:
     image: selenium/hub:latest
@@ -28,15 +27,13 @@ services:
       - "4444:4444"
       - "5900-5999:5900-5999"
     environment:
-      - GRID_MAX_SESSION=200
+      - GRID_MAX_SESSION=50
       - GRID_BROWSER_TIMEOUT=180000
       - GRID_TIMEOUT=180000
       - GRID_CLEAN_UP_CYCLE=2000
       - GRID_NEW_SESSION_WAIT_TIMEOUT=90000
       
 
-    networks:
-      automation:
 
 
   chrome:
@@ -50,65 +47,64 @@ services:
       
     volumes:
       - ./chrome-data:/home/seluser/chrome-data
-    networks:
-      - automation
+ 
 
-  firefox:
-    image: selenium/node-firefox:latest
-    depends_on:
-      - selenium-hub
-    environment:
-      - SE_EVENT_BUS_HOST=selenium-hub
-      - SE_EVENT_BUS_PUBLISH_PORT=4442
-      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-    networks:
-      - automation
+  # firefox:
+  #   image: selenium/node-firefox:latest
+  #   depends_on:
+  #     - selenium-hub
+  #   environment:
+  #     - SE_EVENT_BUS_HOST=selenium-hub
+  #     - SE_EVENT_BUS_PUBLISH_PORT=4442
+  #     - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+  #   networks:
+  #     - automation
 
-  edge:
-    image: selenium/node-edge:latest
-    depends_on:
-      - selenium-hub
-    environment:
-      - SE_EVENT_BUS_HOST=selenium-hub
-      - SE_EVENT_BUS_PUBLISH_PORT=4442
-      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-    networks:
-      - automation
+  # edge:
+  #   image: selenium/node-edge:latest
+  #   depends_on:
+  #     - selenium-hub
+  #   environment:
+  #     - SE_EVENT_BUS_HOST=selenium-hub
+  #     - SE_EVENT_BUS_PUBLISH_PORT=4442
+  #     - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+  #   networks:
+  #     - automation
 
-  chrome_video:
-    image: selenium/video:ffmpeg-4.3.1-20230421
-    volumes:
-      - /tmp/videos:/videos
-    depends_on:
-      - chrome
-    environment:
-      - DISPLAY_CONTAINER_NAME=chrome
-      - FILE_NAME=chrome_video.mp4
-    networks:
-      - automation
+  # chrome_video:
+  #   image: selenium/video:ffmpeg-4.3.1-20230421
+  #   volumes:
+  #     - /tmp/videos:/videos
+  #   depends_on:
+  #     - chrome
+  #   environment:
+  #     - DISPLAY_CONTAINER_NAME=chrome
+  #     - FILE_NAME=chrome_video.mp4
+  #   networks:
+  #     - automation
 
-  nginx:
-    image: nginx
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    depends_on:
-      - automation
-      - chrome
-    networks:
-      - automation
+  # nginx:
+  #   image: nginx
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf
+  #   depends_on:
+  #     - automation
+  #     - chrome
+  #   networks:
+  #     - automation
 
-  prometheus:
-    image: prom/prometheus
-    container_name: prometheus
-    ports:
-      - "9090:9090"
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-    networks:
-      - automation
+  # prometheus:
+  #   image: prom/prometheus
+  #   container_name: prometheus
+  #   ports:
+  #     - "9090:9090"
+  #   volumes:
+  #     - ./prometheus.yml:/etc/prometheus/prometheus.yml
+  #   networks:
+  #     - automation
 
-networks:
-  automation:
-    external: true
+# networks:
+#   automation:
+  
