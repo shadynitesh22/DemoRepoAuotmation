@@ -39,7 +39,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.KEY }}
-          port: ${{secrets.PORT}}
+          port: ${{PORT }}
 
           script: |
             ssh -o StrictHostKeyChecking=no -i ${{env.LOCATION}} ${{ env.ASERVER_HOST }} << EOF
