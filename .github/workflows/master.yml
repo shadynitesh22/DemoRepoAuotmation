@@ -47,7 +47,7 @@ jobs:
       # Copy the Docker Compose file from jump server to remote server
       - name: Copy Docker Compose file to Remote server
         run: |
-          scp -o "StrictHostKeyChecking=no" -o "ProxyJump=niteshp@jump.benekiva.io" -i ./niteshp.pem /docker-compose.yml @ubuntu@aedev.benekiva.io:/
+          scp -o "StrictHostKeyChecking=no" -o "ProxyJump=niteshp@jump.benekiva.io" -i .ssh/niteshp.pem /docker-compose.yml @ubuntu@aedev.benekiva.io:/
 
       # SSH into remote server to deploy
       - name: Deploy using SSH
