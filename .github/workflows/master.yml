@@ -43,10 +43,10 @@ jobs:
 
           script: |
             ssh -i ${{env.LOCATION}} ${{ env.ASERVER_HOST }} 
-              mkdir automationBenekiva
+
               cd automationBenekiva
 
-              docker-compose build
-              docker network create automation        
+              sudo docker-compose build
+              sudo docker network create automation        
               # docker-compose up
           
