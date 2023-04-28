@@ -26,16 +26,18 @@ services:
     container_name: selenium-hub
     ports:
       - "4444:4444"
+      - "5900-5999:5900-5999"
     environment:
       - GRID_MAX_SESSION=200
       - GRID_BROWSER_TIMEOUT=180000
       - GRID_TIMEOUT=180000
       - GRID_CLEAN_UP_CYCLE=2000
       - GRID_NEW_SESSION_WAIT_TIMEOUT=90000
-      - GRID_JVM_OPTS=-Xmx2048m
+      
 
     networks:
       automation:
+
 
   chrome:
     image: selenium/node-chrome:latest
@@ -45,8 +47,11 @@ services:
       - SE_EVENT_BUS_HOST=selenium-hub
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      
+    volumes:
+      - ./chrome-data:/home/seluser/chrome-data
     networks:
-      automation:
+      - automation
 
   firefox:
     image: selenium/node-firefox:latest
@@ -57,7 +62,7 @@ services:
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
     networks:
-      automation:
+      - automation
 
   edge:
     image: selenium/node-edge:latest
@@ -68,22 +73,7 @@ services:
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
     networks:
-      automation:
-
-  vnc-chrome:
-    build:
-      context: ./
-      dockerfile: VNC-chrom-Dockerfile
-    ports:
-      - "5901:5900"
-    depends_on:
-      - chrome
-    environment:
-      - VNCSERVER_REMOVE_PW=1
-      - VNC_COL_DEPTH=24
-      - VNC_RESOLUTION=1920x1080x24
-    networks:
-      automation:
+      - automation
 
   chrome_video:
     image: selenium/video:ffmpeg-4.3.1-20230421
@@ -95,7 +85,8 @@ services:
       - DISPLAY_CONTAINER_NAME=chrome
       - FILE_NAME=chrome_video.mp4
     networks:
-      automation:
+      - automation
+
   nginx:
     image: nginx
     ports:
@@ -104,6 +95,7 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - automation
+      - chrome
     networks:
       - automation
 
@@ -119,3 +111,4 @@ services:
 
 networks:
   automation:
+    external: true

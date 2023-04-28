@@ -32,12 +32,6 @@ COPY entrypoint.sh /app/
 RUN chmod +x /app/entrypoint.sh
 # RUN chmod +x /app/start_vnc.sh
 
-# Set environment variables
-ENV DISPLAY=:99
-ENV VNC_COL_DEPTH=24
-ENV VNC_RESOLUTION=1920x1080
-ENV VNCSERVER_REMOVE_PW=1
-ENV VNC_VIEW_ONLY=false
 
 
 ENTRYPOINT ["/app/entrypoint.sh"]

@@ -7,8 +7,8 @@ while curl http://host.docker.internal:4444/wd/hub/status| grep -q "Selenium Gri
   sleep 1
 done
 
-# Compile the artifacts
 
-# Xvfb :99 -screen 0 1920x1080x24 &
+
+Xvfb :99 -screen 0 1920x1080x24 &
 
 mvn test -Dsurefire.suiteXmlFiles=testng.xml
