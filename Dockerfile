@@ -16,10 +16,10 @@ COPY pom.xml /app
 
 RUN mvn package -DskipTests=true
 
-COPY ./target /app
 
 COPY testing.xml /app
 
+# Copy the rest of the files to the app directory
 COPY . /app/
 
 COPY src /app/src
