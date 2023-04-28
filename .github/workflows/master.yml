@@ -42,14 +42,6 @@ jobs:
           port: 2020
 
           script: |
-            scp -o "StrictHostKeyChecking=no" -o "ProxyJump=niteshp@jump.benekiva.io" -i ~/.ssh/niteshp.pem /docker-compose.yml @ubuntu@aedev.benekiva.io:/
-
-      
-      # # Copy the Docker Compose file from jump server to remote server
-      # - name: Copy Docker Compose file to Remote server
-      #   run: |
-        
-
 
       # SSH into remote server to deploy
       - name: Deploy using SSH
