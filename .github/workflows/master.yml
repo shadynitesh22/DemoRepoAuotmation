@@ -27,7 +27,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.KEY }}
-          port: ${{secrets.PORT}}
+          port: 2020
 
           source: ./docker-compose.yml
           target: ./
@@ -39,7 +39,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.KEY }}
-          port: ${{PORT }}
+          port: 2020
 
           script: |
             ssh -o StrictHostKeyChecking=no -i ${{env.LOCATION}} ${{ env.ASERVER_HOST }} << EOF
