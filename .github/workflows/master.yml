@@ -42,11 +42,38 @@ jobs:
           port: 2020
 
           script: |
-            ssh -i ${{env.LOCATION}} ${{ env.ASERVER_HOST }} 
+            touch new.txt
 
-              cd automationBenekiva
+      - name: Deploy in automationServer
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.AHOST }}
+          key: ${{secrets.AKEY}}
 
-              sudo docker-compose build
-              sudo docker network create automation        
-              # docker-compose up
-          
+          script: |
+
+            touch new.txt
+            cd automationBenekiva
+
+            sudo docker-compose build
+            sudo docker network create automation        
+            # docker-compose up
+
+      # Copy the Docker Compose file from jump server to remote server
+      - name: Copy Docker Compose file to Remote server
+        run: |
+          ssh -o "StrictHostKeyChecking=no" -J ${{ secrets.JUMP_SERVER_USER }}@${{ secrets.HOST }}: -i ${{ secrets.KEY }} @${{ secrets.AHOST }} "
+            scp -o "StrictHostKeyChecking=no" /docker-compose.yml ${{ secrets.AUSER }}@${{ secrets.AHOST }}:/"
+
+      # SSH into remote server to deploy
+      - name: Deploy using SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.AHOST }}
+          key: ${{ secrets.AKEY }}
+
+          script: |
+
+            sudo docker-compose build
+            sudo docker network create automation        
+            # docker-compose up
