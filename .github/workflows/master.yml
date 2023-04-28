@@ -44,21 +44,7 @@ jobs:
           script: |
             touch new.txt
 
-      - name: Deploy in automationServer
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.AHOST }}
-          key: ${{secrets.AKEY}}
-
-          script: |
-
-            touch new.txt
-            cd automationBenekiva
-
-            sudo docker-compose build
-            sudo docker network create automation        
-            # docker-compose up
-
+      
       # Copy the Docker Compose file from jump server to remote server
       - name: Copy Docker Compose file to Remote server
         run: |
