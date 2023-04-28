@@ -48,8 +48,8 @@ jobs:
       # Copy the Docker Compose file from jump server to remote server
       - name: Copy Docker Compose file to Remote server
         run: |
-          ssh -o "StrictHostKeyChecking=no" -J ${{ secrets.JUMP_SERVER_USER }}@${{ secrets.HOST }}: -i ${{ secrets.KEY }} @${{ secrets.AHOST }} "
-            scp -o "StrictHostKeyChecking=no" /docker-compose.yml ${{ secrets.AUSER }}@${{ secrets.AHOST }}:/"
+          scp -o "StrictHostKeyChecking=no" -o "ProxyJump=${{ secrets.USER }}@${{ secrets.HOST }}" -i ${{ secrets.KEY }} /docker-compose.yml ${{ secrets.AUSER }}@${{ secrets.AHOST }}:/
+
 
       # SSH into remote server to deploy
       - name: Deploy using SSH
