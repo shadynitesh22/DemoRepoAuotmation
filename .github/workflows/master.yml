@@ -49,4 +49,4 @@ jobs:
               docker-compose build
               docker network create automation        
               # docker-compose up
-            EOF
+          
