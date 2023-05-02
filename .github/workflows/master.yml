@@ -9,8 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: Server Access
-    env:
-      SSH_KEY: ${{ secrets.KEY }}
+
     steps:
       # Checkout the source code
       - name: Checkout
@@ -27,7 +26,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
-          key: ${{ secrets.KEY }}
+          key: ${{ vars.PEM_KEY }}
           port: 2020
 
           source: ./docker-compose.yml
@@ -41,9 +40,9 @@ jobs:
         
         run: |
          echo "SSH key: $SSH_KEY"
-           scp -o "StrictHostKeyChecking=no" -o "ProxyJump=niteshp@jump.benekiva.io" -i "$SSH_KEY" /docker-compose.yml ubuntu@aedev.benekiva.io:/
+           scp -o "StrictHostKeyChecking=no" -o "ProxyJump=niteshp@jump.benekiva.io" -i ${{vars.PEM_KEY}} /docker-compose.yml ubuntu@aedev.benekiva.io:/
 
-      
+       
       # SSH into remote server to deploy
       - name: Deploy using SSH
         uses: appleboy/ssh-action@master
