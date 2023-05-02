@@ -41,7 +41,8 @@ jobs:
         
         run: |
           echo "${{ vars.PEM_KEY }}"
-           scp -o "StrictHostKeyChecking=no" -o "ProxyJump=niteshp@jump.benekiva.io" -i ${{ vars.PEM_KEY }} /docker-compose.yml ubuntu@aedev.benekiva.io:/
+           scp -o StrictHostKeyChecking=no -o ProxyJump=niteshp@jump.benekiva.io -i ${vars.PEM_KEY} /docker-compose.yml ubuntu@aedev.benekiva.io:/
+
 
       
       # SSH into remote server to deploy
