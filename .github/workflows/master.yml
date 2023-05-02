@@ -27,7 +27,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
-          key: "$PEM_KEY"
+          key: ${{ vars.PEM_KEY }}
           port: 2020
 
           source: ./docker-compose.yml
