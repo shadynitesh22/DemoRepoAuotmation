@@ -33,20 +33,18 @@ jobs:
           source: ./docker-compose.yml
           target: ./
 
- 
-
       # Copy the Docker Compose file from jump server to remote server
       - name: Copy Docker Compose file to Remote server
-       
-        
+
         run: |
           echo "${{ vars.PEM_KEY }}" > pem_key.pem
-          ssh -o StrictHostKeyChecking=no -o ProxyJump=niteshp@jump.benekiva.io -i pem_key.pem -p 2020 ubuntu@aedev.benekiva.io "echo 'SSH connection established'; sleep 10" &
+          echo "${{ vars.AUTOMATION_KEY }}" > remote_key.pem
+          run: |
 
-          scp -o StrictHostKeyChecking=no -o ProxyJump=niteshp@jump.benekiva.io -o ControlPath=~/.ssh/control-socket -i pem_key.pem -P 2020 /docker-compose.yml ubuntu@aedev.benekiva.io:/
 
+          ssh -o StrictHostKeyChecking=no -o ProxyJump=niteshp@jump.benekiva.io -i pem_key.pem ubuntu@aedev.benekiva.io "echo 'SSH connection established'; sleep 10" &
+          scp -o StrictHostKeyChecking=no -o ProxyJump=niteshp@jump.benekiva.io -o ControlPath=~/.ssh/control-socket -i remote_key.pem /docker-compose.yml ubuntu@aedev.benekiva.io:/
 
-      
       # SSH into remote server to deploy
       - name: Deploy using SSH
         uses: appleboy/ssh-action@master
