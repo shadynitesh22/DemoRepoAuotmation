@@ -9,7 +9,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: Server Access
-
+    env:
+      SSH_KEY: ${{ secrets.KEY }}
     steps:
       # Checkout the source code
       - name: Checkout
@@ -36,8 +37,7 @@ jobs:
 
       # Copy the Docker Compose file from jump server to remote server
       - name: Copy Docker Compose file to Remote server
-        env:
-           SSH_KEY: ${{ secrets.KEY }}
+       
         
         run: |
            scp -o "StrictHostKeyChecking=no" -o "ProxyJump=niteshp@jump.benekiva.io" -i "$SSH_KEY" /docker-compose.yml ubuntu@aedev.benekiva.io:/
