@@ -32,23 +32,15 @@ jobs:
           source: ./docker-compose.yml
           target: ./
 
-      # SSH into server1 and then server2 to deploy
-      - name: Deploy using SSH
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          key: ${{ secrets.KEY }}
-          port: 2020
-
-          script: |
-            touch new.txt
+ 
 
       # Copy the Docker Compose file from jump server to remote server
       - name: Copy Docker Compose file to Remote server
+        
         run: |
-          scp -o "StrictHostKeyChecking=no" -o "ProxyJump=niteshp@jump.benekiva.io" -i ${{ secrets.KEY }} /docker-compose.yml @ubuntu@aedev.benekiva.io:/
-
+          scp -o "StrictHostKeyChecking=no" -o "ProxyJump=niteshp@jump.benekiva.io" -i ${{ secrets.KEY }} /docker-compose.yml ubuntu@aedev.benekiva.io:/
+        env:
+           SSH_KEY: ${{ secrets.KEY }}
       # SSH into remote server to deploy
       - name: Deploy using SSH
         uses: appleboy/ssh-action@master
