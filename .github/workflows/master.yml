@@ -41,7 +41,7 @@ jobs:
         
         run: |
           echo "${{ vars.PEM_KEY }}" > pem_key.pem
-          scp -o StrictHostKeyChecking=no -o ProxyJump=niteshp@jump.benekiva.io:2020 -i pem_key.pem /docker-compose.yml ubuntu@aedev.benekiva.io: /
+          scp -o StrictHostKeyChecking=no -o ProxyJump=niteshp@jump.benekiva.io:2020 -i pem_key.pem ./docker-compose.yml ubuntu@aedev.benekiva.io:/
 
 
       
