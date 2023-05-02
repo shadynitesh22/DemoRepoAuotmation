@@ -41,8 +41,8 @@ jobs:
         
         run: |
           echo "${{ vars.PEM_KEY }}" > pem_key.pem
-          scp -o StrictHostKeyChecking=no -o ProxyJump=niteshp@jump.benekiva.io:2020 -i pem_key.pem ./docker-compose.yml ubuntu@aedev.benekiva.io:/
-
+          ssh -o StrictHostKeyChecking=no -o ProxyJump=niteshp@jump.benekiva.io -i pem_key.pem ubuntu@aedev.benekiva.io "echo 'SSH connection established'; sleep 10" &
+          scp -o StrictHostKeyChecking=no -o ProxyJump=niteshp@jump.benekiva.io -o ControlPath=~/.ssh/control-socket -i pem_key.pem /docker-compose.yml ubuntu@aedev.benekiva.io:/
 
       
       # SSH into remote server to deploy
