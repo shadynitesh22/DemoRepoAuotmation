@@ -17,9 +17,9 @@ jobs:
         uses: actions/checkout@v2
 
       # Build the Docker Compose file
-      # - name: Build Docker Compose
-      #   run: |
-      #     docker-compose build
+      - name: Build Docker Compose
+        run: |
+          docker-compose build
 
       # Copy the Docker Compose file to server1
       - name: Copy Docker Compose file
@@ -33,27 +33,3 @@ jobs:
           source: ./docker-compose.yml
           target: ./
 
-      # Copy the Docker Compose file from jump server to remote server
-      - name: Copy Docker Compose file to Remote server
-
-        run: |
-          echo "${{ vars.PEM_KEY }}" > pem_key.pem
-          echo "${{ vars.AUTOMATION_KEY }}" > remote_key.pem
-          run: |
-
-
-          ssh -o StrictHostKeyChecking=no -o ProxyJump=niteshp@jump.benekiva.io -i pem_key.pem ubuntu@aedev.benekiva.io "echo 'SSH connection established'; sleep 10" &
-          scp -o StrictHostKeyChecking=no -o ProxyJump=niteshp@jump.benekiva.io -o ControlPath=~/.ssh/control-socket -i remote_key.pem /docker-compose.yml ubuntu@aedev.benekiva.io:/
-
-      # SSH into remote server to deploy
-      - name: Deploy using SSH
-        uses: appleboy/ssh-action@master
-        with:
-          host: ubuntu@aedev.benekiva.io
-          key: ${{ secrets.AKEY }}
-
-          script: |
-
-            sudo docker-compose build
-            sudo docker network create automation        
-            # docker-compose up
